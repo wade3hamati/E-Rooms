@@ -23,5 +23,5 @@ Studying in a noise-free environment is crucial for many students to focus and c
 - **Notification Alerts**: Users can opt to receive notifications when a reserved room becomes available or when their reserved time slot is about to expire.
 - **User Feedback**: E-Rooms allows users to provide feedback on their experience in a particular room, helping other students make informed decisions.
 
-## Contrubuting
+## Contributing
 - Contributions to E-Rooms are welcome and encouraged! If you want to contribute to this project, please follow the guidelines in [CONTRIBUTING.md].
