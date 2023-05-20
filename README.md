@@ -7,7 +7,7 @@ E-Rooms is a project developed to help students find quiet and noise-free rooms 
 - [Introduction](#introduction)
 - [Features](#features)
 - [Usage(soon)](#usage)
-- [Contributing](https://github.com/wade3hamati/E-Rooms/blob/main/CONTRIBUTING.md)
+- [Contributing](#contributing)
 
 ## Introduction
 
@@ -24,4 +24,4 @@ Studying in a noise-free environment is crucial for many students to focus and c
 - **User Feedback**: E-Rooms allows users to provide feedback on their experience in a particular room, helping other students make informed decisions.
 
 ## Contributing
-- Contributions to E-Rooms are welcome and encouraged! If you want to contribute to this project, please follow the guidelines in [CONTRIBUTING.md].
+- Contributions to E-Rooms are welcome and encouraged! If you want to contribute to this project, please follow the guidelines in [CONTRIBUTING.md](https://github.com/wade3hamati/E-Rooms/blob/main/CONTRIBUTING.md).
