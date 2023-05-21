@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Empty Rooms Finder</title>
+</head>
+<body>
+	<h1>Empty Rooms Finder</h1>
+	<p>Enter the date and time to find available rooms:</p>
+	<input type="text" id="date-time" placeholder="e.g. Tuesday, 2:50 PM">
+	<button onclick="findEmptyRooms()">Find Empty Rooms</button>
+	<br><br>
+	<div id="output"></div>
+
+	<script>
+		function findEmptyRooms() {
+			// Get user input of date and time
+			const input = document.getElementById("date-time").value;
+			const date = new Date(input);
+			const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+			const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+			// Read and parse CSV file
+			const fileInput = document.createElement("input");
+			fileInput.type = "file";
+			fileInput.accept = ".csv";
+			fileInput.addEventListener('change', () => {
+				const reader = new FileReader();
+				reader.onload = () => {
+					const rows = reader.result.split('\n');
+					const headers = rows[0].split(',');
+					const locationIndex = headers.indexOf("Location Descr");
+					const startTimeIndex = headers.indexOf("Class Start Time");
+					const endTimeIndex = headers.indexOf("Class End Time");
+
+					// Find empty rooms
+					const emptyRooms = [];
+					for (let i = 1; i < rows.length; i++) {
+						const cols = rows[i].split(',');
+						const location = cols[locationIndex];
+						const startTime = new Date("1970-01-01T" + cols[startTimeIndex] + "Z");
+						const endTime = new Date("1970-01-01T" + cols[endTimeIndex] + "Z");
+
+						if (cols[0] !== "" && startTime <= date && endTime >= date) {
+							emptyRooms.push(location);
+						}
+					}
+
+					// Display output
+					const outputDiv = document.getElementById("output");
+					if (emptyRooms.length === 0) {
+						outputDiv.innerHTML = "No empty rooms found on " + day + " at " + time;
+					} else {
+						outputDiv.innerHTML = "Empty rooms on " + day + " at " + time + ":<br>";
+						for (let i = 0; i < emptyRooms.length; i++) {
+							outputDiv.innerHTML += emptyRooms[i] + "<br>";
+						}
+					}
+				}
+				reader.readAsText(fileInput.files[0]);
+			});
+			fileInput.click();
+		}
+	</script>
+</body>
+</html>
+<!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Empty Room Finder</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <h1>Empty Room Finder</h1>
+    <form>
+      <label for="datetime">Date and Time:</label>
+      <input type="datetime-local" id="datetime" name="datetime">
+      <br><br>
+      <input type="submit" value="Find Empty Rooms">
+    </form>
+    <br>
+    <div id="output"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Campus</th>
+          <th>Building</th>
+          <th>Room Number</th>
+          <th>Time of Availability</th>
+        </tr>
+      </thead>
+      <tbody id="room-data">
+      </tbody>
+    </table>
+    <script src="chatGPT.js"></script>
+  </body>
+</html> -->
